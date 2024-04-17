@@ -15,14 +15,24 @@
             "Action": [
                 "s3:GetObject"
             ],
-            "Resource": "arn:aws:s3:::upload-image-to-thumbnail"
+            "Resource": "arn:aws:s3:::thumb-origin-bucket/*"
         },
         {
             "Effect": "Allow",
             "Action": [
                 "s3:PutObject"
             ],
-            "Resource": "arn:aws:s3:::resize-destination-bucket"
+            "Resource": "arn:aws:s3:::thumb-destination-bucket/*"
+        },
+        {
+            "Effect": "Allow",
+            "Action": [
+                "s3:ListBucket"
+            ],
+            "Resource": [
+                "arn:aws:s3:::thumb-origin-bucket",
+                "arn:aws:s3:::thumb-destination-bucket"
+            ]
         }
     ]
 }
