@@ -15,12 +15,12 @@ In this repo you will find these files:
 
 ## Whats the best infrastructure choice?
 
-## AWS Cloud
-### Cons of AWS Cloud:
+### AWS Cloud
+#### Cons of AWS Cloud:
 - Not Using Infrastructure as Code (IaC): The text states that AWS Cloud is not fully utilizing Infrastructure as Code (IaC). I recommend emphasizing the importance of IaC for managing infrastructure efficiently. IaC allows you to provision and manage resources using code, which improves consistency, version control, and automation.
 - Replication Complexity: The text highlights the complexity of replicating resources across regions or environments. While AWS provides command-line interfaces (CLI) and batch files for replication, executing each task manually can be error-prone. To simplify this process, consider using tools like Former2, which generate IaC based on existing AWS infrastructure.
 - Lack of External Libraries for Automation: The absence of external libraries for automation can limit flexibility. Exploring third-party libraries or custom scripts can enhance automation capabilities.
-### Pros of AWS:
+#### Pros of AWS:
 - Centralized Infrastructure Configuration: AWS allows centralized management of infrastructure configuration. This facilitates better interaction with other AWS services and tools.
 - IaC Options: AWS provides multiple IaC options, including:
   - AWS CloudFormation: A declarative IaC service for provisioning and managing AWS resources.
@@ -29,11 +29,11 @@ In this repo you will find these files:
   - HashiCorp Terraform and Pulumi: Third-party tools for managing infrastructure as code.
 
 ### IaC like Terraform or CDK
-### Pros:
+#### Pros:
 - Automation and Flexibility: Terraform and CDK automate infrastructure provisioning and deployment. They offer flexibility and reproducibility.
 - Scalability: These tools make it easier to scale resources as needed.
 - Enhanced Security: Testing code before production deployment improves security.
-### Cons:
+#### Cons:
 - Learning Curve: Learning the language and maintaining IaC can be time-consuming.
 - Feedback Delay: Immediate feedback on errors may be limited compared to DevOps practices.
 
