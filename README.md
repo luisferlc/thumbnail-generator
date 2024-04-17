@@ -17,8 +17,8 @@ In this repo you will find these files:
 
 ### AWS Cloud
 #### Cons of AWS Cloud:
-- Not Using Infrastructure as Code (IaC): The text states that AWS Cloud is not fully utilizing Infrastructure as Code (IaC). I recommend emphasizing the importance of IaC for managing infrastructure efficiently. IaC allows you to provision and manage resources using code, which improves consistency, version control, and automation.
-- Replication Complexity: The text highlights the complexity of replicating resources across regions or environments. While AWS provides command-line interfaces (CLI) and batch files for replication, executing each task manually can be error-prone. To simplify this process, consider using tools like Former2, which generate IaC based on existing AWS infrastructure.
+- Not Using Infrastructure as Code (IaC): IaC allows you to provision and manage resources using code, which improves consistency, version control, and automation.
+- Replication Complexity: While AWS provides command-line interfaces (CLI) and batch files for replication, executing each task manually can be error-prone. To simplify this process, consider using tools like Former2, which generate IaC based on existing AWS infrastructure.
 - Lack of External Libraries for Automation: The absence of external libraries for automation can limit flexibility. Exploring third-party libraries or custom scripts can enhance automation capabilities.
 #### Pros of AWS:
 - Centralized Infrastructure Configuration: AWS allows centralized management of infrastructure configuration. This facilitates better interaction with other AWS services and tools.
