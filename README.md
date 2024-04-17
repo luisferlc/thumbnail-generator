@@ -1,17 +1,19 @@
 # Thumbnail Generator
 An app in python dedicated to generate thumbnail images whenever a user uploads an image to S3 bucket. 
 This app is structured entirely with AWS Cloud using these elements:
-- S3 Buckets.
 - IAM role.
+- S3 Buckets.
 - Policies.
+- Execution role.
+- Lambda function based on deployment package.
 - Triggers.
-- Lambda function.
 
-In this repo you will find these files:
+#### In this repo you will find these files:
 - lambda_function.py: it contains Python code to get an image and then transform it to thumbnail.
 - deployment-thumbnail-package.zip: it contains the necessary tools/libraries for correctly executing the lambda_function.py
 - s3_policy.json: JSON code that generates the policy needed to give permission to enter S3 Buckets and use them as origin and final repositories of thumbnail images.
 - test_event.json: JSON code to test the lambda_function.py inside AWS.
+- thumbnail generator example.zip: a video is inside showing an example of the program.
 
 ## Whats the best infrastructure choice?
 
