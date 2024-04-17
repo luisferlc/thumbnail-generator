@@ -38,7 +38,7 @@ In this repo you will find these files:
 - Feedback Delay: Immediate feedback on errors may be limited compared to DevOps practices.
 
 ## Best Case Scenario:
-Considering business needs and budget, a combination of traditional infrastructure management (using GUI) and IaC is recommended. AWS offers various options to explore this hybrid approach1.
+Considering business needs and budget, a combination of traditional infrastructure management (using GUI) and IaC is recommended. AWS offers various options to explore this hybrid approach.
 Remember that choosing the right approach depends on specific project requirements and organizational context. Evaluating trade-offs and aligning with business goals will guide your decision-making process. 
 
 
