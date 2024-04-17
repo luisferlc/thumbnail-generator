@@ -18,7 +18,7 @@ destination_bucket = os.environ.get("destination_bucket")
             
 def resize_image(image_path, resized_path):
   with Image.open(image_path) as image:
-    image.thumbnail(tuple(x / 2 for x in image.size))
+    image.thumbnail(tuple(x / 5 for x in image.size))
     image.save(resized_path)
             
 def lambda_handler(event, context):
