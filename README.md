@@ -17,12 +17,12 @@ This app is structured entirely with AWS Cloud using these elements:
 
 ## Whats the best infrastructure choice?
 
-### AWS Cloud
-#### Cons of AWS Cloud:
+### AWS Console
+#### Cons:
 - Not Using Infrastructure as Code (IaC): IaC allows you to provision and manage resources using code, which improves consistency, version control, and automation.
 - Replication Complexity: While AWS provides command-line interfaces (CLI) and batch files for replication, executing each task manually can be error-prone. To simplify this process, consider using tools like Former2, which generate IaC based on existing AWS infrastructure.
 - Lack of External Libraries for Automation: The absence of external libraries for automation can limit flexibility. Exploring third-party libraries or custom scripts can enhance automation capabilities.
-#### Pros of AWS:
+#### Pros:
 - Centralized Infrastructure Configuration: AWS allows centralized management of infrastructure configuration. This facilitates better interaction with other AWS services and tools.
 - IaC Options: AWS provides multiple IaC options, including:
   - AWS CloudFormation: A declarative IaC service for provisioning and managing AWS resources.
@@ -40,7 +40,7 @@ This app is structured entirely with AWS Cloud using these elements:
 - Feedback Delay: Immediate feedback on errors may be limited compared to DevOps practices.
 
 ## Best Case Scenario:
-Considering business needs and budget, a combination of traditional infrastructure management (using GUI) and IaC is recommended. AWS offers various options to explore this hybrid approach.
+Considering business needs and budget, a combination of traditional infrastructure management (using the Console) and IaC is recommended. AWS offers various options to explore this hybrid approach.
 Remember that choosing the right approach depends on specific project requirements and organizational context. Evaluating trade-offs and aligning with business goals will guide your decision-making process. 
 
 
