@@ -43,11 +43,14 @@ This app is structured entirely with AWS Cloud using these elements:
 Considering business needs and budget, a combination of traditional infrastructure management (using the Console) and IaC is recommended. AWS offers various options to explore this hybrid approach.
 Remember that choosing the right approach depends on specific project requirements and organizational context. Evaluating trade-offs and aligning with business goals will guide your decision-making process. 
 
-
-
 ### Info on this topic:
 - https://www.reddit.com/r/aws/comments/vk81kt/am_i_alone_in_just_using_aws_console_instead_of/
 - https://www.reddit.com/r/aws/comments/11ocnwr/cloud_formation_or_terraform/
 - https://docs.aws.amazon.com/prescriptive-guidance/latest/choose-iac-tool/introduction.html
 - https://thenewstack.io/the-pros-and-cons-of-iac-what-you-need-
+
+## CloudFormation > IaC Generator
+### Necesary resources
+![image](https://github.com/luisferlc/thumbnail-generator/assets/51351852/e45a4431-7671-4bff-9d7e-60f94c52fe1d)
+Code in JSON file here in this repo: "thumbnail-template-code.json"
 
