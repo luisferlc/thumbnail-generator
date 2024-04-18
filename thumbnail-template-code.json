@@ -1,0 +1,281 @@
+{
+    "Metadata": {
+        "TemplateId": "arn:aws:cloudformation:us-east-2:471112979044:generatedTemplate/42f6e913-98a6-4246-b80f-62e84d84b9e2"
+    },
+    "Parameters": {
+        "LambdaFunction00CreateThumbnail00MmqUFCodeS3KeyOneOfDZghd": {
+            "NoEcho": "true",
+            "Type": "String",
+            "Description": "The Amazon S3 key of the deployment package.\nThis property can be replaced with other exclusive properties"
+        },
+        "LambdaFunction00CreateThumbnail00MmqUFCodeS3BucketOneOfqwUcW": {
+            "NoEcho": "true",
+            "Type": "String",
+            "Description": "An Amazon S3 bucket in the same AWS-Region as your function. The bucket can be in a different AWS-account.\nThis property can be replaced with other exclusive properties"
+        }
+    },
+    "Resources": {
+        "S3Bucket00thumboriginbucket00pDgs1": {
+            "UpdateReplacePolicy": "Retain",
+            "Type": "AWS::S3::Bucket",
+            "DeletionPolicy": "Retain",
+            "Properties": {
+                "NotificationConfiguration": {
+                    "QueueConfigurations": [],
+                    "TopicConfigurations": [],
+                    "LambdaConfigurations": [
+                        {
+                            "Function": {
+                                "Fn::GetAtt": [
+                                    "LambdaFunction00CreateThumbnail00MmqUF",
+                                    "Arn"
+                                ]
+                            },
+                            "Event": "s3:ObjectCreated:*"
+                        }
+                    ]
+                },
+                "PublicAccessBlockConfiguration": {
+                    "RestrictPublicBuckets": true,
+                    "IgnorePublicAcls": true,
+                    "BlockPublicPolicy": true,
+                    "BlockPublicAcls": true
+                },
+                "BucketName": "thumb-origin-bucket",
+                "OwnershipControls": {
+                    "Rules": [
+                        {
+                            "ObjectOwnership": "BucketOwnerEnforced"
+                        }
+                    ]
+                },
+                "BucketEncryption": {
+                    "ServerSideEncryptionConfiguration": [
+                        {
+                            "BucketKeyEnabled": true,
+                            "ServerSideEncryptionByDefault": {
+                                "SSEAlgorithm": "AES256"
+                            }
+                        }
+                    ]
+                }
+            }
+        },
+        "IAMGroup00AdminIAM00pHAgg": {
+            "UpdateReplacePolicy": "Retain",
+            "Type": "AWS::IAM::Group",
+            "DeletionPolicy": "Retain",
+            "Properties": {
+                "GroupName": "AdminIAM",
+                "Path": "/",
+                "ManagedPolicyArns": [
+                    "arn:aws:iam::aws:policy/AdministratorAccess"
+                ]
+            }
+        },
+        "IAMUser00adminluisferlc00VQT0W": {
+            "UpdateReplacePolicy": "Retain",
+            "Type": "AWS::IAM::User",
+            "DeletionPolicy": "Retain",
+            "Properties": {
+                "Path": "/",
+                "ManagedPolicyArns": [
+                    "arn:aws:iam::aws:policy/AmazonS3FullAccess"
+                ],
+                "UserName": "admin-luisferlc",
+                "LoginProfile": {
+                    "PasswordResetRequired": false
+                },
+                "Groups": [
+                    {
+                        "Ref": "IAMGroup00AdminIAM00pHAgg"
+                    }
+                ]
+            }
+        },
+        "LambdaFunction00CreateThumbnail00MmqUF": {
+            "UpdateReplacePolicy": "Retain",
+            "Type": "AWS::Lambda::Function",
+            "DeletionPolicy": "Retain",
+            "Properties": {
+                "MemorySize": 128,
+                "Description": "",
+                "TracingConfig": {
+                    "Mode": "PassThrough"
+                },
+                "Timeout": 60,
+                "RuntimeManagementConfig": {
+                    "UpdateRuntimeOn": "Auto"
+                },
+                "Handler": "lambda_function.lambda_handler",
+                "Code": {
+                    "S3Bucket": {
+                        "Ref": "LambdaFunction00CreateThumbnail00MmqUFCodeS3BucketOneOfqwUcW"
+                    },
+                    "S3Key": {
+                        "Ref": "LambdaFunction00CreateThumbnail00MmqUFCodeS3KeyOneOfDZghd"
+                    }
+                },
+                "Role": {
+                    "Fn::GetAtt": [
+                        "IAMRole00LambdaS3Role00paI5P",
+                        "Arn"
+                    ]
+                },
+                "FileSystemConfigs": [],
+                "FunctionName": "CreateThumbnail",
+                "Runtime": "python3.9",
+                "PackageType": "Zip",
+                "LoggingConfig": {
+                    "LogFormat": "Text",
+                    "LogGroup": "/aws/lambda/CreateThumbnail"
+                },
+                "Environment": {
+                    "Variables": {
+                        "destination_bucket": "thumb-destination-bucket"
+                    }
+                },
+                "EphemeralStorage": {
+                    "Size": 512
+                },
+                "Architectures": [
+                    "x86_64"
+                ]
+            }
+        },
+        "IAMManagedPolicy00policyLambdaS3Policy0071HX0": {
+            "UpdateReplacePolicy": "Retain",
+            "Type": "AWS::IAM::ManagedPolicy",
+            "DeletionPolicy": "Retain",
+            "Properties": {
+                "ManagedPolicyName": "LambdaS3Policy",
+                "Path": "/",
+                "Description": "",
+                "Groups": [],
+                "PolicyDocument": {
+                    "Version": "2012-10-17",
+                    "Statement": [
+                        {
+                            "Resource": "arn:aws:logs:*:*:*",
+                            "Action": [
+                                "logs:PutLogEvents",
+                                "logs:CreateLogGroup",
+                                "logs:CreateLogStream"
+                            ],
+                            "Effect": "Allow"
+                        },
+                        {
+                            "Resource": "arn:aws:s3:::thumb-origin-bucket/*",
+                            "Action": [
+                                "s3:GetObject"
+                            ],
+                            "Effect": "Allow"
+                        },
+                        {
+                            "Resource": "arn:aws:s3:::thumb-destination-bucket/*",
+                            "Action": [
+                                "s3:PutObject"
+                            ],
+                            "Effect": "Allow"
+                        },
+                        {
+                            "Resource": [
+                                "arn:aws:s3:::thumb-origin-bucket",
+                                "arn:aws:s3:::thumb-destination-bucket"
+                            ],
+                            "Action": [
+                                "s3:ListBucket"
+                            ],
+                            "Effect": "Allow"
+                        }
+                    ]
+                },
+                "Roles": [
+                    "LambdaS3Role"
+                ],
+                "Users": []
+            }
+        },
+        "IAMRole00LambdaS3Role00paI5P": {
+            "UpdateReplacePolicy": "Retain",
+            "Type": "AWS::IAM::Role",
+            "DeletionPolicy": "Retain",
+            "Properties": {
+                "Path": "/",
+                "ManagedPolicyArns": [
+                    {
+                        "Ref": "IAMManagedPolicy00policyLambdaS3Policy0071HX0"
+                    }
+                ],
+                "MaxSessionDuration": 3600,
+                "RoleName": "LambdaS3Role",
+                "Description": "Allows Lambda functions to call AWS services on your behalf.",
+                "AssumeRolePolicyDocument": {
+                    "Version": "2012-10-17",
+                    "Statement": [
+                        {
+                            "Action": "sts:AssumeRole",
+                            "Effect": "Allow",
+                            "Principal": {
+                                "Service": "lambda.amazonaws.com"
+                            }
+                        }
+                    ]
+                }
+            }
+        },
+        "LambdaPermission00functionCreateThumbnail00EDfJK": {
+            "UpdateReplacePolicy": "Retain",
+            "Type": "AWS::Lambda::Permission",
+            "DeletionPolicy": "Retain",
+            "Properties": {
+                "FunctionName": {
+                    "Fn::GetAtt": [
+                        "LambdaFunction00CreateThumbnail00MmqUF",
+                        "Arn"
+                    ]
+                },
+                "Action": "lambda:InvokeFunction",
+                "SourceArn": {
+                    "Fn::GetAtt": [
+                        "S3Bucket00thumboriginbucket00pDgs1",
+                        "Arn"
+                    ]
+                },
+                "Principal": "s3.amazonaws.com",
+                "SourceAccount": "471112979044"
+            }
+        },
+        "S3Bucket00thumbdestinationbucket00PPr3g": {
+            "UpdateReplacePolicy": "Retain",
+            "Type": "AWS::S3::Bucket",
+            "DeletionPolicy": "Retain",
+            "Properties": {
+                "PublicAccessBlockConfiguration": {
+                    "RestrictPublicBuckets": true,
+                    "IgnorePublicAcls": true,
+                    "BlockPublicPolicy": true,
+                    "BlockPublicAcls": true
+                },
+                "BucketName": "thumb-destination-bucket",
+                "OwnershipControls": {
+                    "Rules": [
+                        {
+                            "ObjectOwnership": "BucketOwnerEnforced"
+                        }
+                    ]
+                },
+                "BucketEncryption": {
+                    "ServerSideEncryptionConfiguration": [
+                        {
+                            "BucketKeyEnabled": true,
+                            "ServerSideEncryptionByDefault": {
+                                "SSEAlgorithm": "AES256"
+                            }
+                        }
+                    ]
+                }
+            }
+        }
+    }
+}
